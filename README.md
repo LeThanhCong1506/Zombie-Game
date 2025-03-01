@@ -57,9 +57,9 @@
 
 ## 📌 Roadmap
 🔹 **Planned Updates:**
-- [x] **More Zombie Types** – Different AI behaviors.
-- [ ] **New Weapons, Upgrades, characters,...** – Greater customization.**
-- [ ] **Story mode**
+- **More Zombie Types** – Different AI behaviors.
+- **New Weapons, Upgrades, characters,...** – Greater customization.**
+- **Story mode**
 
 ## 💡 Contributing
 Want to contribute? Feel free to fork the repo, make improvements, and submit a **pull request**!
