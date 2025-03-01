@@ -1,5 +1,5 @@
 # 🧟 Zombie-Game 🎮
-![Logo](https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Attack%202%20(1).png)
+<img align="right" alt="Coding" width="200" src="https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Attack%202%20(1).png">
 
 ## 📖 Introduction
 **Zombie-Game** is a thrilling **roguelike survival game** built with **Unity**. In this game, you must fight against waves of zombies, collect resources, and survive as long as possible. With randomized levels and permadeath mechanics, every playthrough is a new challenge!
