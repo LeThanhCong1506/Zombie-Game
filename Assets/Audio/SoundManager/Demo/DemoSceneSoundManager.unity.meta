@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: daea041f8fd73384d89a3df1d6dcd297
+timeCreated: 1455381026
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 56087
+  packageName: Sound Manager - Audio, Sound and Music Manager for Unity
+  packageVersion: 1.1.1
+  assetPath: Assets/SoundManager/Demo/DemoSceneSoundManager.unity
+  uploadId: 304671
