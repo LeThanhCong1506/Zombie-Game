@@ -53,7 +53,7 @@
 ![Gameplay Screenshot](https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Screenshot%202025-03-01%20194358.png)
 
 🎥 **Gameplay Trailer:**
-[![Watch the Trailer](https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Trailer.gif)
+![Watch the Trailer](https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Trailer.gif)
 
 ## 📌 Roadmap
 🔹 **Planned Updates:**
