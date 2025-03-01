@@ -57,7 +57,7 @@
 
 ## 📌 Roadmap
 🔹 **Planned Updates:**
-- [ ] **More Zombie Types** – Different AI behaviors.
+- [x] **More Zombie Types** – Different AI behaviors.
 - [ ] **New Weapons, Upgrades, characters,...** – Greater customization.**
 - [ ] **Story mode**
 
