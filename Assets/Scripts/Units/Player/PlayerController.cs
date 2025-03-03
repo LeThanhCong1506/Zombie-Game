@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private bool m_IsMoving;
     private bool m_IsGameOver;
+    private float m_LastActionTime;
+    private float m_ActionCoolDown = 0.25f;
     public bool CanRestart;
     public bool IsStand;
     public bool IsPlayerStoped;
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameOverChecked())
             return;
-        if(PlayerMovingChecked())
+        if (PlayerMovingChecked())
             return;
         PlayerHasMovedChecked();
     }
@@ -93,18 +95,24 @@ public class PlayerController : MonoBehaviour
         Vector2Int newCellTarget = m_CurrentCell;
         bool hasMoved = false;
         bool hasStayed = false;
-        HandleMovedInput(ref hasMoved, ref hasStayed ,ref newCellTarget);
+        HandleMovedInput(ref hasMoved, ref hasStayed, ref newCellTarget);
         HasMovedChecked(hasMoved, hasStayed, newCellTarget);
     }
 
     private void HandleMovedInput(ref bool hasMoved, ref bool hasStayed, ref Vector2Int newCellTarget)
     {
-        if (IsPlayerStoped == true)
+        if (Time.time <= m_LastActionTime + m_ActionCoolDown)
+        {
+            return;
+        }
+
+        if (IsPlayerStoped)
         {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 hasStayed = true;
                 IsPlayerStoped = false;
+                m_LastActionTime = Time.time;
             }
 
             if (Keyboard.current.upArrowKey.wasPressedThisFrame
@@ -114,37 +122,43 @@ public class PlayerController : MonoBehaviour
             {
                 hasMoved = true;
                 IsPlayerStoped = false;
+                m_LastActionTime = Time.time;
             }
         }
         else if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             hasStayed = true;
+            m_LastActionTime = Time.time;
         }
         else if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             newCellTarget.y += 1;
             hasMoved = true;
+            m_LastActionTime = Time.time;
         }
         else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
             newCellTarget.y -= 1;
             hasMoved = true;
+            m_LastActionTime = Time.time;
         }
         else if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             newCellTarget.x += 1;
             hasMoved = true;
+            m_LastActionTime = Time.time;
         }
         else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
             newCellTarget.x -= 1;
             hasMoved = true;
+            m_LastActionTime = Time.time;
         }
     }
 
-    private void HasMovedChecked(bool hasMoved, bool hasStayed,Vector2Int newCellTarget)
+    private void HasMovedChecked(bool hasMoved, bool hasStayed, Vector2Int newCellTarget)
     {
-        if(hasStayed)
+        if (hasStayed)
         {
             IsStand = true;
             GameManager.Instance.TurnManager.Tick();
@@ -175,7 +189,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void EnteredConditionHandled(BoardManager.CellData cellData)
+    private void EnteredConditionHandled(CellData cellData)
     {
         if (cellData.ContainedObject.gameObject.name.ToLower().Contains("smallfood"))
         {
@@ -243,7 +257,7 @@ public class PlayerController : MonoBehaviour
     public void Load(PlayerSaveData data)
     {
         transform.position = data.Position;
-        this.Spawn(GameManager.Instance.BoardManager, new Vector2Int((int)transform.position.x,(int)transform.position.y));
+        this.Spawn(GameManager.Instance.BoardManager, new Vector2Int((int)transform.position.x, (int)transform.position.y));
         IsPlayerStoped = data.IsPlayerStoped;
         m_IsGameOver = data.m_IsGameOver;
     }

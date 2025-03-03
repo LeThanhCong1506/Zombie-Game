@@ -13,6 +13,7 @@ public class Enemy : CellObject
     private AudioManager m_AudioManager;
     private Animator m_Animator;
     private bool m_IsMoving;
+    private bool m_IsMovingConsecutively;
     private Vector3 m_MoveTarget;
     private int m_CurrentHealth;
     private int m_CurrentDamage;
@@ -31,6 +32,7 @@ public class Enemy : CellObject
     {
         base.Init(coord);
         m_IsMoving = false;
+        m_IsMovingConsecutively = false;
         m_CurrentHealth = Health;
         m_CurrentDamage = Damage;
     }
@@ -57,7 +59,7 @@ public class Enemy : CellObject
             m_AudioManager.PlaySFX(m_AudioManager.EnemyDeath);
             GameManager.Instance.PlayerController.Animator.SetBool("Panic", false);
             GameManager.Instance.EnemiesKilledStats++;
-            Debug.Log("Enemy killed: " + GameManager.Instance.EnemiesKilledStats);  
+            Debug.Log("Enemy killed: " + GameManager.Instance.EnemiesKilledStats);
             Destroy(gameObject);
         }
 
@@ -160,6 +162,10 @@ public class Enemy : CellObject
 
         if (immediate == false)
         {
+            //giả sử enemy đang di chuyển liên tục không đứng lại
+            if (m_IsMoving)
+                m_IsMovingConsecutively = true;
+
             m_IsMoving = true;
 
             //remove enemy from current cell
@@ -185,13 +191,14 @@ public class Enemy : CellObject
         }
         transform.position = target;
 
-        StartCoroutine(MovingAnimatorAfterSeconds(1.0f));
-    }
-
-    IEnumerator MovingAnimatorAfterSeconds(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        m_IsMoving = false;
-        m_Animator.SetBool("Moving", false);
+        //khi nó không di chuyển liên tục nữa thì mới hoạt động
+        if (!m_IsMovingConsecutively)
+        {
+            yield return new WaitForSeconds(1.0f);
+            m_IsMoving = false;
+            m_Animator.SetBool("Moving", false);
+        }
+        else
+            m_IsMovingConsecutively = false;
     }
 }

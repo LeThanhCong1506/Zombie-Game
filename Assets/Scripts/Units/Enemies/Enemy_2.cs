@@ -13,6 +13,7 @@ public class Enemy_2 : CellObject
     private AudioManager m_AudioManager;
     private Animator m_Animator;
     private bool m_IsMoving;
+    private bool m_IsMovingConsecutively;
     private Vector3 m_MoveTarget;
     private int m_CurrentHealth;
     private int m_CurrentDamage;
@@ -31,6 +32,7 @@ public class Enemy_2 : CellObject
     {
         base.Init(coord);
         m_IsMoving = false;
+        m_IsMovingConsecutively = false;
         m_CurrentHealth = Health;
         m_CurrentDamage = Damage;
     }
@@ -160,6 +162,9 @@ public class Enemy_2 : CellObject
 
         if (immediate == false)
         {
+            if (m_IsMoving)
+                m_IsMovingConsecutively = true;
+
             m_IsMoving = true;
 
             //remove enemy from current cell
@@ -185,13 +190,13 @@ public class Enemy_2 : CellObject
         }
         transform.position = target;
 
-        StartCoroutine(MovingAnimatorAfterSeconds(1.0f));
-    }
-
-    IEnumerator MovingAnimatorAfterSeconds(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        m_IsMoving = false;
-        m_Animator.SetBool("Moving", false);
+        if (!m_IsMovingConsecutively)
+        {
+            yield return new WaitForSecondsRealtime(1.0f);
+            m_IsMoving = false;
+            m_Animator.SetBool("Moving", false);
+        }
+        else
+            m_IsMovingConsecutively = false;
     }
 }
