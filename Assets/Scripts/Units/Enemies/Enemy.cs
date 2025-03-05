@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -202,3 +203,9 @@ public class Enemy : CellObject
             m_IsMovingConsecutively = false;
     }
 }
+
+//yield return null trong Unity không thoát ra khỏi vòng lặp. Thay vào đó, nó tạm dừng thực thi của coroutine cho đến khung hình tiếp theo. Điều này có nghĩa là coroutine sẽ tiếp tục từ vị trí đó trong khung hình tiếp theo, cho phép các hành động khác trong trò chơi tiếp tục diễn ra mà không bị gián đoạn.
+
+//Trong ngữ cảnh của đoạn mã bạn đã cung cấp, yield return null được sử dụng để tạm dừng vòng lặp while trong coroutine MovingCoroutine cho đến khung hình tiếp theo. Điều này giúp di chuyển đối tượng Enemy một cách mượt mà từng chút một trong mỗi khung hình, thay vì di chuyển ngay lập tức đến vị trí mục tiêu.
+
+//Trong mỗi khung hình, đoạn mã bên trong vòng lặp while sẽ được thực thi một lần, sau đó tạm dừng tại yield return null và tiếp tục trong khung hình tiếp theo. Điều này tạo ra hiệu ứng di chuyển mượt mà cho đối tượng Enemy.
