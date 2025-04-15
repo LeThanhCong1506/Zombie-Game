@@ -55,6 +55,9 @@
 ## 🎥 Gameplay Trailer:
 ![Watch the Trailer](https://github.com/LeThanhCong1506/Zombie-Game/blob/main/imgs/Trailer.gif)
 
+## 🎥 Gameplay Demo Video:
+https://drive.google.com/file/d/1Q0dYQ5H83xfYNWANuSzOYg956kuSnF0O/view?usp=sharing
+
 ## 📌 Roadmap
 🔹 **Planned Updates:**
 - **More Zombie Types** – Different AI behaviors.
